@@ -3,7 +3,6 @@
  speed of modulation - frequency of modulator
 the amount of the modulation (how many hertz above and below the frequency of your carrier signal the audible signal will swing) is determined by the amplitude of the modulator.
  //maybe arpeggiator is a child of sequencer??? make different kinds of sequencer? traditional, euclidean, arpeggiator
- //use euclidean pattern inside delay maybe?
  //effects such as reverb, delay etc should deffo be structs!
  */
 
@@ -15,6 +14,9 @@ metronome(sampleRate)
 {}
 //--------------------------------------------------------------
 void ofApp::setup(){
+    //----------------------------------------------------------
+    // Carrier setup
+    //----------------------------------------------------------
     //    c.push_back(Carrier(30,  0, 0));
     //    c.push_back(Carrier(50,  0, 0));
     //    c.push_back(Carrier(100, 0, 0));
@@ -60,7 +62,6 @@ void ofApp::setup(){
     //----------------------------------------------------------
     // Sample setup
     //----------------------------------------------------------
-
     sample[0].load("data/bd.wav");
     sample[1].load("data/snr.wav");
     sample[2].load("data/hh.wav");
@@ -70,7 +71,15 @@ void ofApp::setup(){
     //----------------------------------------------------------
     
     //create our sequencer objects, each takes a reference to metronome which is what keeps track of and increments time
-   for (int i = 0; i < sample.size(); i++) sequencer.push_back(Sequencer(&metronome, &controller[i]));
+    for (int i = 0; i < sample.size(); i++){
+       sequencer.push_back(Sequencer(&metronome, &controller[i]));
+    }
+    /*
+     registering listeer to an event
+     bunch of objects interested in an event
+     
+     function of metronome that takes a pointer vector of sequencers
+     */
     
     //set the subdivisions we want for our sequencers
     sequencer[0].setSubdivision("4thNote");
@@ -85,15 +94,32 @@ void ofApp::setup(){
     for (auto &s : sample) s.setPosition(1.0);
     
     //----------------------------------------------------------
-    // Draw shapes
+    // Setup DrawShape
     //----------------------------------------------------------
     for (int i = 0; i < sequencer.size(); i++) drawshape.push_back(DrawShape(&sequencer[i], 250*(i+1), ofGetHeight()/2));
     for (auto &shape : drawshape) shape.setup();
     
-
+    ptr_drawshape.push_back(new DrawShape());
+    ptr_drawshape.push_back(new DrawShape());
+    ptr_drawshape.push_back(new DrawShape());
+    
+    
+    
+    //-----------------------------------------------------------
+    // Register Sequencers Listeners in Metronome object
+    //-----------------------------------------------------------
+    vector<Sequencer*> ptr_sequencer;
+    
+    for (int i = 0; i < sequencer.size(); i++){
+        ptr_sequencer.push_back(&sequencer[i]);
+    }
+    
+    metronome.registerSequencerListeners(ptr_sequencer);
+    
     //----------------------------------------------------------
     // Soundstream setup
     //----------------------------------------------------------
+    
     //output, input, samplerate, buffersize, number of buffers, two per channel is recommended
     soundStream.setup(this, 2, 0, sampleRate, bufferSize, 4);
   }
@@ -108,9 +134,7 @@ void ofApp::update(){
     //-----------------------------------------------------------
     // Update the sequencers
     //-----------------------------------------------------------
-              for (auto &seq : sequencer) seq.run();
-
-  
+    for (auto &seq : sequencer) seq.run();
 }
 
 //--------------------------------------------------------------
@@ -157,12 +181,16 @@ void ofApp::keyPressed(int key){
     if (key == 'q'){
           --bpm;
         metronome.setTempo(bpm);
-        for (int i = 0; i < sequencer.size(); i++) sequencer[i].updateTempo();
+      //  for (int i = 0; i < sequencer.size(); i++) sequencer[i].updateTempo();
     }
     if (key == 'w'){
         ++bpm;
         metronome.setTempo(bpm);
-        for (int i = 0; i < sequencer.size(); i++) sequencer[i].updateTempo();
+      //  for (int i = 0; i < sequencer.size(); i++) sequencer[i].updateTempo();
+    }
+    
+    if(key =='m'){
+        metronome.getSequencerStatus();
     }
 }
 

@@ -57,7 +57,10 @@ const int sampleRate = 44100;
     vector<FM>         fm;
     vector<Sequencer>  sequencer;
     vector<maxiSample> sample;
-    vector<DrawShape> drawshape;
+    vector<DrawShape>  drawshape;
+    
+    vector<DrawShape *> ptr_drawshape;
+    
 
     //void carrierUpdate();
     // void carrierOutput();

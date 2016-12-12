@@ -19,13 +19,16 @@ class DrawShape{
 public:
     void drawLines();
     void setup();
+    void setup(Sequencer *_sequencer, float _tx, float _ty);
     void draw();
     void run();
     void clear();
     void update();
     int  circle_resolution;
     int  radius;
+    DrawShape();
     DrawShape(Sequencer *_sequencer, float _tx, float _ty);
+    ~DrawShape();
     Sequencer *sequencer;
     ofVec2f pos;
     ofVec2f prev_pos;

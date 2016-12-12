@@ -18,11 +18,11 @@ typedef unsigned long long ull;
 #include "controller.hpp"
 
 
-     //////////////////////////////////////////////////////////////////
-    // tick keeps track of where we are in time                     //
-   // stepSize is the length of the sequence (i.e. how many nHits) //
-  // trigger is for triggering samples                            //
- // nBeats is how many hits we have in our sequence              //
+//////////////////////////////////////////////////////////////////
+// tick keeps track of where we are in time                     //
+// stepSize is the length of the sequence (i.e. how many nHits) //
+// trigger is for triggering samples                            //
+// nBeats is how many hits we have in our sequence              //
 //  offset offsets the rhythmic sequence                        //
 /////////////////////////////////////////////////////////////////
 
@@ -42,13 +42,12 @@ public:
     vector<bool> bjorklund(int b, int s);
     Sequencer(Metronome *_metronome);
     Sequencer(Metronome *_metronome, Controller *_controller);
+    ~Sequencer();
     Metronome *metronome;
     Controller *controller;
     int synchronize_subdivisions;
     void updateTempo();
     void run();
-    //ull (Metronome::*pt2function)(char selection)= NULL;
-    ull (Metronome::*p) (char);
 };
 
 #endif /* sequencer_hpp */

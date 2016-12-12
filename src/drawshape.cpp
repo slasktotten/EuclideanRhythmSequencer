@@ -8,12 +8,28 @@
 
 #include "drawshape.hpp"
 
+DrawShape::DrawShape(){}
+//--------------------------------------------------------------
+
+
 DrawShape::DrawShape(Sequencer *_sequencer, float _tx, float _ty): sequencer(_sequencer), tx(_tx), ty(_ty)
 {}
 
 //--------------------------------------------------------------
+DrawShape::~DrawShape(){
+
+}
+//--------------------------------------------------------------
 
 void DrawShape::setup(){
+    //radius of circle
+    radius = 80;
+    temp = 0;
+}
+
+//--------------------------------------------------------------
+
+void DrawShape::setup(Sequencer *_sequencer, float _tx, float _ty){
     //radius of circle
     radius = 80;
     temp = 0;
@@ -44,17 +60,10 @@ void DrawShape::draw(){
         }
         ofPushStyle();
         
-        //moving circle, timing not working properly
+        //moving circle, timing not working properly, so to compensate
 
-    
         //sequencer is ticking upp from 0-4
         temp = (sequencer->tick);
-        
-//        if (sequencer->tick== 0) temp = 4;
-//        if (sequencer->tick== 1) temp = 0;
-//        if (sequencer->tick== 2) temp = 1;
-//        if (sequencer->tick== 3) temp = 2;
-//        if (sequencer->tick== 4) temp = 3;
         
         temp = positive_modulo(temp-1, circle_resolution);
         
@@ -63,11 +72,6 @@ void DrawShape::draw(){
             ofDrawCircle(pos.x, pos.y, 50);
         }
         ofPopStyle();
-        
-       //create a circle for each step. Bigger if there is a pulse
-        /*
-         sequencer->steps[i]-1 & circle
-         */
         
         if(sequencer->steps[i] == 1) {
             ofFill();

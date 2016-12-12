@@ -7,16 +7,17 @@
 //
 
 #include "metronome.hpp"
+#include "sequencer.hpp"
 
 Metronome::Metronome(int _sampleRate): sampleRate(_sampleRate){
-
- //need to change 120 to bpm variable
-//https://forum.openframeworks.cc/t/accurate-sequencing/3404/3 idea for formula taken comes from here
+    
+    //need to change 120 to bpm variable
+    //https://forum.openframeworks.cc/t/accurate-sequencing/3404/3 idea for formula taken comes from here
     lengthOfOneBeatInSamples = (float)sampleRate*60.f/(60);
     
     /////////////
     // INIT   //
-   ////////////
+    ////////////
     
     sampleCount = 0;
     pulse = 0;
@@ -25,9 +26,13 @@ Metronome::Metronome(int _sampleRate): sampleRate(_sampleRate){
     
 }
 
+Metronome::~Metronome(){
+
+}
+
 //timing for quarter notes, this is your base pulse
 ull Metronome::getNextPulse(){
-   pulse = &lengthOfOneBeatInSamples;
+    pulse = &lengthOfOneBeatInSamples;
     return *pulse;
 }
 
@@ -44,7 +49,15 @@ ull Metronome::getNextSixteenthNote(){
 }
 
 void Metronome::setTempo(int _bpm){
+    
+    // set new tempo
     lengthOfOneBeatInSamples = (float)sampleRate*60.f/(_bpm);
+    
+    // update sequencers
+    for(auto & sequencer: sequencers){
+        sequencer->updateTempo();
+    }
+    
 }
 
 ////////////////////////////////////////////////////
@@ -52,32 +65,28 @@ void Metronome::setTempo(int _bpm){
 //how many samples that've sent to the soundcard//
 /////////////////////////////////////////////////
 
+
+//turns into an integer function
+
+/*
+ int Metronome::sampleCount(){
+ return sampleCount+1;
+ }
+ */
+
 void Metronome::getNextSample(){
- //THIS FUNCTION GOES INSIDE THE AUDIOTHREAD
     sampleCount++;
 }
 
-
-
-
-
-ull Metronome::setSubdivision(char selection){
-    switch(selection){
-        case '4':
-            return lengthOfOneBeatInSamples;
-            break;
-            
-        case '8':
-            return lengthOfOneBeatInSamples/2;
-            break;
-            
-        case '16':
-            return lengthOfOneBeatInSamples/4;
-            break;
-            
-        default :
-            return lengthOfOneBeatInSamples;
+void Metronome::registerSequencerListeners(vector<Sequencer*> _sequencers){
+    sequencers = _sequencers;
+    for(auto sequencer : sequencers){
+        cout << sequencer << endl;
     }
-    
-    
+}
+
+void Metronome::getSequencerStatus(){
+    for(auto sequencer : sequencers){
+        cout << sequencer->subdivision << endl;
+    }
 }

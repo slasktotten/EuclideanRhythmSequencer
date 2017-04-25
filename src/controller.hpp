@@ -17,12 +17,28 @@
 class Controller {
 public:
     Controller();
-    void setup(string name);
-    void draw();
+  virtual void setup(string name);
+    
     ofParameterGroup parameterGroup;
     ofParameter<int> nBeats;
     ofParameter<int> stepSize;
     ofParameter<int> offset;
+    ofParameter<int> subdivision;
+
+    
 };
+
+//-----------------------------------------------------------------//
+
+class NoteController : public Controller {
+public:
+    NoteController();
+    void setup(string name);
+    ofParameter<int> arpeggioType;
+    ofParameter<int> note;
+};
+
+
+
 
 #endif /* controller_hpp */

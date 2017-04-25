@@ -53,11 +53,15 @@ void Carrier::setAmp(double a, double am){
     amp  = a + am;
 }
 
+void Carrier::callbackTest(double _n, double _j){
+    test = _n + _j;
+}
+
 //-----------------------------------------------------------------------//
 
-double FM::signal(string wType, double offset, double f){
-    if(wType == "sine")      return osc.sinewave(f) * offset;
-    if(wType == "square")    return osc.square  (f) * offset;
-    if(wType == "triangle")  return osc.triangle(f) * offset;
+double FM::signal(string _wType, double _offset, double _f){
+    if(_wType == "sine")      return osc.sinewave(_f) * _offset;
+    if(_wType == "square")    return osc.square  (_f) * _offset;
+    if(_wType == "triangle")  return osc.triangle(_f) * _offset;
     return NULL;
 }

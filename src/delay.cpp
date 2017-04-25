@@ -16,7 +16,6 @@ myDelay::myDelay(){
 }
 
 
-//needs commenting
 //based of delayline code provided by Simon Katan in Audio Visual Programming
 double myDelay::slapback(double signal){
     readIndex = writeIndex - int(delaySeconds * 44100);

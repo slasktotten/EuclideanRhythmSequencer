@@ -16,9 +16,8 @@ DrawShape::DrawShape(Sequencer *_sequencer, float _tx, float _ty): sequencer(_se
 {}
 
 //--------------------------------------------------------------
-DrawShape::~DrawShape(){
+DrawShape::~DrawShape(){}
 
-}
 //--------------------------------------------------------------
 
 void DrawShape::setup(){
@@ -29,17 +28,34 @@ void DrawShape::setup(){
 
 //--------------------------------------------------------------
 
-void DrawShape::setup(Sequencer *_sequencer, float _tx, float _ty){
+// turn into templated function with auto variable
+
+
+void DrawShape::setup(Sequencer &_sequencer, float _tx, float _ty){
+    sequencer = &_sequencer;
+    tx = _tx;
+    ty = _ty;
+    
     //radius of circle
     radius = 80;
     temp = 0;
 }
 //--------------------------------------------------------------
 
+//void DrawShape::setup(Arpeggiator *_sequencer, float _tx, float _ty){
+//    sequencer = _sequencer;
+//    tx = _tx;
+//    ty = _ty;
+//    
+//    //radius of circle
+//    radius = 80;
+//    temp = 0;
+//}
+//--------------------------------------------------------------
+
 void DrawShape::update(){
     //amount of points in our circle
       circle_resolution = sequencer->stepSize;
-
 }
 
 //--------------------------------------------------------------
@@ -49,7 +65,7 @@ void DrawShape::draw(){
     ofTranslate(tx, ty); // move initital drawing postion to the center of the screen
     
     for( int i = 0; i < circle_resolution; i ++) {
-        angle = TWO_PI/circle_resolution*i;
+        angle = TWO_PI/ circle_resolution*i;
         x = cos(angle) * radius;
         y = sin(angle) * radius;
         pos.set(x,y);

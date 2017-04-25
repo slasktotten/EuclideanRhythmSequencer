@@ -11,16 +11,17 @@
 
 #include <stdio.h>
 #include "ofMain.h"
-#include "ofxMaxim.h"
+
+typedef std::function<void ()> Cb;
+
 class Instrument{
 public:
     Instrument();
-    void on();
-    void off();
-    void output(double _input);
-    double signal;
-    double amp;
-    void signal_processing();
+    void noteOn(Cb  _cb);
+    void noteOn(Cb  _cb, Cb _cb2);
+    void noteOff(Cb _cb);
+    
+    vector<Cb> callbackfunctions;
 };
 
 

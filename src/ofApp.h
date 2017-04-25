@@ -3,78 +3,97 @@
 #include "ofMain.h"
 #include "ofxMaxim.h"
 #include "Oscilllator.hpp"
-#include "Instrument.hpp"
 #include "delay.hpp"
 #include "sequencer.hpp"
-#include "reverb.hpp"
 #include "metronome.hpp"
 #include "ofxGui.h"
 #include "drawshape.hpp"
 #include "controller.hpp"
+
 typedef unsigned long long ull;
+typedef std::shared_ptr<NoteController> derivedptr;
 
-class ofApp : public ofBaseApp{
+using namespace std::placeholders; // use for std::bind parameters readability
 
-	public:
-		void setup();
-		void update();
-		void draw();
-        ofApp();
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void mouseEntered(int x, int y);
-		void mouseExited(int x, int y);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
-        void drawLines();
-        void audioOut(float * output, int bufferSize, int nChannels);
-      float amp;
-      float dB;
-      int bufferSize;
-      int nBeats;
-      int bpm;
-const int sampleRate = 44100;
-      double mixedSignal[2];
-      double fm_freq, offset;
-      double sampleOutput;
-    
-    inline float AmplitudeTodB(float amplitude);
-    inline float dBToAmplitude(float dB);
-    
-    ofxPanel gui;
-    ofParameterGroup parameterGroup;
-    vector<Controller> controller;
-    
-    ofSoundStream soundStream;
-    Metronome     metronome;
-    
-    vector<Carrier>    c;
-    vector<FM>         fm;
-    vector<Sequencer>  sequencer;
-    vector<maxiSample> sample;
-    vector<DrawShape>  drawshape;
-    
-    vector<DrawShape *> ptr_drawshape;
-    
-
-    //void carrierUpdate();
-    // void carrierOutput();
-    //    maxiMix       mix;
-    //    maxiDyn       comp;
-    //    maxiFilter    lowpass;
-    //    Instrument    instr;
-    //    myDelay       delay;
-    //    Reverb        reverb; //not working
+struct Notes{
+    vector<double> frequencyVector;
+    convert mtof;
+    const int nMidiValues = 127;
+    Notes() {
+        for (int i = 0; i <= nMidiValues; i++){
+            frequencyVector.push_back(mtof.mtof(i));
+        }
+    }
 };
 
 
-//add oscillator when a key is pressed. make sure the note corresponds to correct key input, i.e. c.push_back(); this means i have to move frequency and other things to the constructor
 
-//3 ocillator subtractive synth
+class ofApp : public ofBaseApp{
+public:
+    void setup();
+    void update();
+    void draw();
+    void exit();
+    void keyPressed(int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y );
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void mouseEntered(int x, int y);
+    void mouseExited(int x, int y);
+    void windowResized(int w, int h);
+    void dragEvent(ofDragInfo dragInfo);
+    void gotMessage(ofMessage msg);
+    void audioOut(float * output, int bufferSize, int nChannels);
+    
+    float amp;
+    float dB;
+    int bpm;
+    double mixedSignal[2];
+    
+    const int sampleRate = 44100; // const instead of a #define
+    const int bufferSize = 256;
+    inline float AmplitudeTodB(float *_amplitude);
+    inline float dBToAmplitude(float *_dB);
 
-//am, filter
+    Notes notes;
+    
+    ofxPanel gui;
+    ofParameterGroup parameterGroup;
+    
+    ofSoundStream soundStream;
+   
+    vector<std::unique_ptr<DrawShape>> ptr_drawshape;
+    vector<std::shared_ptr<Arpeggiator>> arpeggiator;
+    vector<std::shared_ptr<Sequencer>> sample_sequencer;
+    
+    
+    vector<Controller *> ptr_controller;
+// make some kind of listener, so that nBeats cant be larger than nSize
+    
+    
+    vector<maxiSample> sample;
+    vector<Carrier>    c;
+    vector<FM>         fm;
+    
+    double sampleOutput();
+    void carrierUpdate();
+    double carrierOutput();
+    
+    double sampleout;
+    double finalOutput;
+    double carrierout;
+    
+    std::function<void(double, double)> cb;
+    
+    
+
+
+        maxiMix       mix;
+        myDelay       delay;
+    //    maxiDyn       comp;
+    //    maxiFilter    lowpass;
+    //    Instrument    instr;
+    //    Reverb        reverb; //not working
+};

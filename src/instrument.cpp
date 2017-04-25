@@ -8,25 +8,17 @@
 
 #include "instrument.hpp"
 
-Instrument::Instrument(){
-    
+Instrument::Instrument(){}
+
+void Instrument::noteOn(Cb _cb){
+    callbackfunctions.push_back(_cb);
 }
 
-
-
-void Instrument::output(double _input){
-    signal  = _input;
+void Instrument::noteOn(Cb _cb, Cb _cb2){
+    callbackfunctions.push_back(_cb);
+    noteOff(_cb2);
 }
 
-void Instrument::signal_processing(){
-    /*
-     do dsp stuff to signal in here
-     */
+void Instrument::noteOff(Cb _cb){
+    callbackfunctions.push_back(_cb);
 }
-
-
-/*
- I need an array of oscillators to be able to pass through the instrument class
- Inside the Instrument class I need to be able to process the signal through effects, filters and other dsp stuff
- 
- */

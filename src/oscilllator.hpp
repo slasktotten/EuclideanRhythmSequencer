@@ -14,6 +14,7 @@
 #include "ofxMaxim.h"
 //turn into an abstract base class
 
+
 class Oscil
 {
 public:
@@ -40,14 +41,16 @@ class Carrier : public Oscil {
     Carrier(double _f, double _modSignal, double _a);
     void setFreq(double f, double fm);
     void setAmp(double f, double am);
+    void callbackTest(double _n, double _j);
     double f, a, modSignal;
+    int test;
 };
 
 //-----------------------------------------------------------------//
 
 class FM : public Oscil {
 public:
-    double signal(string wType, double offset, double f);
+    double signal(string _wType, double _offset, double _f);
 //    freq   = rate of modulation
 //    offset = amount of modulation, i.e. target frequency
 //    modulation should be higher than carrier signal

@@ -17,9 +17,7 @@
 		AF0580829426DC6BCA135A5C /* maxiGrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FB19B70632A6F86622D94 /* maxiGrains.cpp */; };
 		DA037A5D1DE7F6B30058C57B /* metronome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA037A5B1DE7F6B30058C57B /* metronome.cpp */; };
 		DA5266311DCC8F4000953E0B /* sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA52662F1DCC8F4000953E0B /* sequencer.cpp */; };
-		DA573AA11DE37685006903A3 /* reverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA573A9F1DE37685006903A3 /* reverb.cpp */; };
 		DA5CEF241DF1C131007B51EC /* controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA5CEF221DF1C131007B51EC /* controller.cpp */; };
-		DA784A3C1DC795040034C1DA /* instrument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA784A3A1DC795040034C1DA /* instrument.cpp */; };
 		DAC16F2B1DB916F000DA3D5D /* oscilllator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC16F291DB916F000DA3D5D /* oscilllator.cpp */; };
 		DADFC9BD1DEF064D00B20E75 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DADFC9AC1DEF064D00B20E75 /* ofxBaseGui.cpp */; };
 		DADFC9BE1DEF064D00B20E75 /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DADFC9AE1DEF064D00B20E75 /* ofxButton.cpp */; };
@@ -86,12 +84,10 @@
 		DA037A5C1DE7F6B30058C57B /* metronome.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = metronome.hpp; sourceTree = "<group>"; };
 		DA52662F1DCC8F4000953E0B /* sequencer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sequencer.cpp; sourceTree = "<group>"; };
 		DA5266301DCC8F4000953E0B /* sequencer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sequencer.hpp; sourceTree = "<group>"; };
-		DA573A9F1DE37685006903A3 /* reverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = reverb.cpp; sourceTree = "<group>"; };
-		DA573AA01DE37685006903A3 /* reverb.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = reverb.hpp; sourceTree = "<group>"; };
 		DA5CEF221DF1C131007B51EC /* controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = controller.cpp; sourceTree = "<group>"; };
 		DA5CEF231DF1C131007B51EC /* controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = controller.hpp; sourceTree = "<group>"; };
-		DA784A3A1DC795040034C1DA /* instrument.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = instrument.cpp; sourceTree = "<group>"; };
-		DA784A3B1DC795040034C1DA /* instrument.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = instrument.hpp; sourceTree = "<group>"; };
+		DA6A86E91E3E4F640051BA4F /* norgard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = norgard.h; sourceTree = "<group>"; };
+		DA7964AC1E256E8400B3B795 /* bjorklund.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bjorklund.h; sourceTree = "<group>"; };
 		DAC16F291DB916F000DA3D5D /* oscilllator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oscilllator.cpp; sourceTree = "<group>"; };
 		DAC16F2A1DB916F000DA3D5D /* oscilllator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = oscilllator.hpp; sourceTree = "<group>"; };
 		DADFC9AC1DEF064D00B20E75 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
@@ -248,22 +244,20 @@
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				DAC16F291DB916F000DA3D5D /* oscilllator.cpp */,
-				DA784A3A1DC795040034C1DA /* instrument.cpp */,
 				DAE719BF1DCBE20700998F1B /* delay.cpp */,
 				DA52662F1DCC8F4000953E0B /* sequencer.cpp */,
 				DA037A5B1DE7F6B30058C57B /* metronome.cpp */,
 				DADFC9C51DEF1DEC00B20E75 /* drawshape.cpp */,
 				DA5CEF221DF1C131007B51EC /* controller.cpp */,
-				DA573A9F1DE37685006903A3 /* reverb.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				DAC16F2A1DB916F000DA3D5D /* oscilllator.hpp */,
-				DA784A3B1DC795040034C1DA /* instrument.hpp */,
 				DAE719C01DCBE20700998F1B /* delay.hpp */,
 				DA5266301DCC8F4000953E0B /* sequencer.hpp */,
-				DA573AA01DE37685006903A3 /* reverb.hpp */,
 				DA037A5C1DE7F6B30058C57B /* metronome.hpp */,
 				DADFC9C61DEF1DEC00B20E75 /* drawshape.hpp */,
 				DA5CEF231DF1C131007B51EC /* controller.hpp */,
+				DA6A86E91E3E4F640051BA4F /* norgard.h */,
+				DA7964AC1E256E8400B3B795 /* bjorklund.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -378,7 +372,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA784A3C1DC795040034C1DA /* instrument.cpp in Sources */,
 				DADFC9C31DEF064D00B20E75 /* ofxSliderGroup.cpp in Sources */,
 				DA5266311DCC8F4000953E0B /* sequencer.cpp in Sources */,
 				DADFC9C01DEF064D00B20E75 /* ofxLabel.cpp in Sources */,
@@ -402,7 +395,6 @@
 				083FB2094A4DE99F5A60397A /* maxiMFCC.cpp in Sources */,
 				22F21CE3B902225374BA1CA2 /* maximilian.cpp in Sources */,
 				9514C2D90467055B1447D074 /* stb_vorbis.c in Sources */,
-				DA573AA11DE37685006903A3 /* reverb.cpp in Sources */,
 				DA5CEF241DF1C131007B51EC /* controller.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,11 +15,12 @@
 #include "sequencer.hpp"
 
 
+
 class DrawShape{
 public:
     void drawLines();
     void setup();
-    void setup(Sequencer *_sequencer, float _tx, float _ty);
+    void setup(Sequencer &_sequencer, float _tx, float _ty);
     void draw();
     void run();
     void clear();
@@ -30,6 +31,7 @@ public:
     DrawShape(Sequencer *_sequencer, float _tx, float _ty);
     ~DrawShape();
     Sequencer *sequencer;
+    Arpeggiator *arpeggiator;
     ofVec2f pos;
     ofVec2f prev_pos;
     vector<ofVec2f> points;
@@ -41,7 +43,7 @@ public:
     
     /* 
      positive modulo
-     because c++ doesnt positive modulus.
+     because c++ doesnt do positive modulus.
      obvs
      */
     inline int positive_modulo(int i, int n);
